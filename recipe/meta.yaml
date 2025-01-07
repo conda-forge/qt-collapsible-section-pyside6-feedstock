@@ -6,23 +6,25 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/qt-collapsible-section-pyside6-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/qt-collapsible-section-pyside6-{{ version }}.tar.gz
   sha256: 56c777d32225f215ab620599bdc3512eb49203e09baadf21221b41a57ae36d4d
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - pyside6
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - qt_collapsible_section
 
